@@ -3,7 +3,7 @@
   "name": "ai.websitepublisher/mcp",
   "title": "WebsitePublisher.ai",
   "version": "1.4.0",
-  "description": "Build and publish websites through AI conversation. Create pages, upload assets, manage data, and deploy to custom domains.",
+  "description": "Build and publish websites through AI conversation.",
   "repository": {
     "type": "git",
     "url": "https://github.com/megberts/mcp-websitepublisher-ai"
