@@ -5,8 +5,8 @@
   "version": "1.4.0",
   "description": "Build and publish websites through AI conversation.",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/megberts/mcp-websitepublisher-ai"
+    "url": "https://github.com/megberts/mcp-websitepublisher-ai",
+    "source": "github"
   },
   "remotes": [
     {
@@ -14,21 +14,5 @@
       "url": "https://mcp.websitepublisher.ai/"
     }
   ],
-  "tools": [
-    "list_projects", "get_project_status",
-    "list_pages", "get_page", "create_page", "update_page", "patch_page", "delete_page",
-    "get_page_versions", "rollback_page",
-    "list_assets", "upload_asset", "delete_asset",
-    "list_entities", "create_entity", "get_entity_schema", "delete_entity",
-    "list_records", "get_record", "create_record", "update_record", "delete_record",
-    "list_integrations", "call_integration"
-  ],
-  "authentication": {
-    "type": "oauth2.1",
-    "discovery": "https://mcp.websitepublisher.ai/.well-known/oauth-protected-resource",
-    "pkce": "required"
-  },
-  "categories": ["web-development", "cms", "website-builder", "no-code"],
-  "homepage": "https://websitepublisher.ai",
-  "documentation": "https://websitepublisher.ai/docs/mcp"
+  "websiteUrl": "https://websitepublisher.ai"
 }
