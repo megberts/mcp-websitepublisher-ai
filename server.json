@@ -1,14 +1,16 @@
 {
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ai.websitepublisher/mcp",
+  "title": "WebsitePublisher.ai",
   "version": "1.4.0",
   "description": "Build and publish websites through AI conversation. Create pages, upload assets, manage data, and deploy to custom domains.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/websitepublisher/mcp-websitepublisher-ai"
+    "url": "https://github.com/megberts/mcp-websitepublisher-ai"
   },
   "remotes": [
     {
-      "transportType": "streamableHttp",
+      "type": "streamable-http",
       "url": "https://mcp.websitepublisher.ai/"
     }
   ],
