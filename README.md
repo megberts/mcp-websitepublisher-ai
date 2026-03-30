@@ -196,3 +196,8 @@ This is the **documentation and integration repository** for the WebsitePublishe
 <p align="center">
   <strong>WebsitePublisher.ai</strong> — The easiest way to build websites with AI.
 </p>
+
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/megberts-mcp-websitepublisher-ai).
+
