@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ai.websitepublisher/mcp",
-  "title": "WebsitePublisher.ai",
-  "version": "1.4.0",
-  "description": "Build and publish websites through AI conversation.",
+  "title": "WebsitePublisher AI",
+  "version": "1.4.1",
+  "description": "Build, publish and run real websites through AI conversation — with auth, payments, forms and a real backend. Import an existing site by URL, or start from scratch. Works with Claude, ChatGPT, Mistral and any MCP client.",
   "repository": {
     "url": "https://github.com/megberts/mcp-websitepublisher-ai",
     "source": "github"
