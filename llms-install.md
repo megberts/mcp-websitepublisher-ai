@@ -12,35 +12,50 @@ WebsitePublisher.ai is a **remote, hosted MCP server**. There is nothing to clon
 
 ## Prerequisites
 
-- Node.js 18 or newer, so that `npx` is available. Check with `node --version`.
 - A browser on the user's machine. The first connection opens a login page.
+- Local port `1456` must be free. Cline receives the OAuth callback on `http://127.0.0.1:1456/mcp/oauth/callback`.
 
-## Installation
+## Installation (native remote connection, recommended)
 
 Add the following entry to `cline_mcp_settings.json`, under `mcpServers`. Keep any servers that are already there.
 
 ```json
 {
   "mcpServers": {
-    "websitepublisher": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.websitepublisher.ai/"],
-      "disabled": false,
-      "autoApprove": []
+    "WebsitePublisher": {
+      "transport": {
+        "type": "streamableHttp",
+        "url": "https://mcp.websitepublisher.ai/"
+      }
     }
   }
 }
 ```
 
-`mcp-remote` bridges the remote server to stdio and handles the OAuth flow.
+Write only the `transport` block. Cline adds the `oauth` section on its own after the user logs in. Never copy an `oauth` section from another machine or from documentation: it holds personal tokens.
 
 ## First connection (user action required)
 
-1. After you save the settings, Cline starts the server. A browser window then opens at `auth.websitepublisher.ai`.
+1. After you save the settings, Cline discovers the auth server and registers itself as a client. A browser window then opens at `auth.websitepublisher.ai`.
 2. The user logs in with Google or with email (a one-time code). Tell the user this is expected.
-3. After login, the browser redirects back and the connection is complete. The token is cached, so later sessions do not open the browser again.
+3. After login, the browser redirects back to Cline and the connection is complete. Cline stores the tokens and refreshes them automatically.
 
 Do not try to complete the login on the user's behalf.
+
+## Alternative: via mcp-remote
+
+Use this only if the native connection is not available in the user's Cline version. It requires Node.js 18 or newer, so that `npx` is available.
+
+```json
+{
+  "mcpServers": {
+    "WebsitePublisher": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.websitepublisher.ai/"]
+    }
+  }
+}
+```
 
 ## Verify the installation
 
@@ -51,9 +66,10 @@ Do not try to complete the login on the user's behalf.
 
 | Symptom | Fix |
 |---|---|
-| `npx: command not found` | Install Node.js 18+ and restart VS Code. |
-| The browser does not open | Restart the server from Cline's MCP Servers panel. `mcp-remote` prints the login URL in the server log, so it can also be opened manually. |
-| `401` / `invalid_token` after it worked before | Clear the cached token with `rm -rf ~/.mcp-auth`, then restart the server and log in again. |
+| The browser does not open | Restart the server from Cline's MCP Servers panel. |
+| The OAuth callback fails | Check that nothing else is listening on port `1456`. |
+| `401` / `invalid_token` after it worked before | Remove the `oauth` section from this server's entry, save the file, then log in again. With mcp-remote, clear `~/.mcp-auth` instead. |
+| `npx: command not found` (mcp-remote only) | Install Node.js 18+ and restart the editor. |
 | Tools not listed | Check that the URL ends with `/` exactly as shown above, then restart the server. |
 
 ## Usage notes for the agent
