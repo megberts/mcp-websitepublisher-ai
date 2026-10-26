@@ -1,49 +1,88 @@
-# 🌐 WebsitePublisher.ai — MCP Server
+# WebsitePublisher AI — MCP Server
 
-**Build and publish websites through AI conversation.**
+**Your AI Builds and Publishes Websites & Apps — You Just Talk**
 
-Create pages, upload assets, manage data, and deploy to custom domains — all from your favorite AI assistant. Just connect and start talking.
+Your AI builds it, and it runs: live on your own domain with login, payments, forms, email and data from day one.
 
-[![MCP](https://img.shields.io/badge/MCP-2025--06--18-blue)](https://modelcontextprotocol.io)
+WebsitePublisher is the AI web platform. Connect the assistant you already use — Claude, ChatGPT, Gemini, Grok, Mistral, Cursor, GitHub Copilot, Devin Desktop (formerly Windsurf), Cline and others — and it builds and publishes real websites and web apps on a live URL. Pages, data, forms, visitor login, scheduled tasks and 133 integrations are MCP tools, with credentials in an encrypted vault the AI never sees. Your project has a memory across sessions and assistants: start in Cline, continue in Claude or ChatGPT months later, and the context is still there.
+
+[![MCP](https://img.shields.io/badge/MCP-2025--11--25-blue)](https://modelcontextprotocol.io)
 [![OAuth 2.1](https://img.shields.io/badge/Auth-OAuth%202.1-green)](https://auth.websitepublisher.ai/.well-known/oauth-authorization-server)
-[![Tools](https://img.shields.io/badge/Tools-57-orange)](#tools)
-[![License](https://img.shields.io/badge/License-SaaS-lightgrey)](https://websitepublisher.ai/terms)
-[![Privacy](https://img.shields.io/badge/Privacy-Policy-blue)](https://websitepublisher.ai/privacy)
+[![Tools](https://img.shields.io/badge/Tools-45-orange)](#-tools)
+[![Integrations](https://img.shields.io/badge/Integrations-133-purple)](https://www.websitepublisher.ai/docs/integrations)
+[![License](https://img.shields.io/badge/License-SaaS-lightgrey)](https://www.websitepublisher.ai/terms)
 
 ---
 
 ## ⚡ Quickstart
 
-### Claude.ai (Connectors)
-1. Go to **Settings → Connectors → Add custom connector**
-2. Enter name: `WebsitePublisher` and URL: `https://mcp.websitepublisher.ai`
-3. Click **Connect** → Browser opens for login → Done ✅
+The server is remote and hosted: `https://mcp.websitepublisher.ai/`. Nothing to install, no API key. Every client logs in with OAuth on first use.
 
-### Claude Desktop
-Add to your `claude_desktop_config.json`:
-```json
-{
-  "mcpServers": {
-    "websitepublisher": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.websitepublisher.ai/"]
-    }
-  }
-}
-```
-Restart Claude Desktop → Browser opens for login → Done ✅
-
-### Mistral / Le Chat (one-click)
-1. Open Le Chat → Intelligence → Connectors → **+ Add Connector**
-2. Choose **Custom MCP Connector**
-3. Enter URL: `https://mcp.websitepublisher.ai/`
-4. Click Connect → Login → Done ✅
+### Claude (claude.ai, Desktop, mobile)
+WebsitePublisher is listed in Anthropic's Connectors Directory: one click, on every Claude plan, free included.
+1. Open the [WebsitePublisher listing](https://claude.ai/directory/websitepublisher-ai), or in claude.ai go to **Settings → Connectors** and search for **WebsitePublisher**.
+2. Click **Connect** and sign in. The tools are available in your chat right away.
 
 ### ChatGPT
-Search **"WebsitePublisher"** in the GPT Store, or visit:
-[chat.openai.com/g/websitepublisher](https://chat.openai.com)
+1. Open the **WebsitePublisher** app in ChatGPT's app directory and connect it (free and Plus accounts work).
+2. Start your message with **@WebsitePublisher**, for example: *"@WebsitePublisher build me a portfolio website"*.
 
-### Cursor / Windsurf / Claude Code
+### Cline
+Add to `cline_mcp_settings.json`. Cline handles the OAuth login:
+```json
+{
+  "mcpServers": {
+    "WebsitePublisher": {
+      "transport": { "type": "streamableHttp", "url": "https://mcp.websitepublisher.ai/" }
+    }
+  }
+}
+```
+The login starts on the first tool call: ask Cline *"List my WebsitePublisher projects"* and sign in when the browser opens. See [llms-install.md](llms-install.md) for agent-driven setup.
+
+### Cursor
+`~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):
+```json
+{
+  "mcpServers": {
+    "websitepublisher": { "url": "https://mcp.websitepublisher.ai/" }
+  }
+}
+```
+Restart Cursor, switch to Agent mode, sign in when the browser opens.
+
+### GitHub Copilot (VS Code 1.101+)
+`.vscode/mcp.json` — note `servers` and `"type": "http"`:
+```json
+{
+  "servers": {
+    "websitepublisher": { "type": "http", "url": "https://mcp.websitepublisher.ai/" }
+  }
+}
+```
+
+### Devin Desktop (formerly Windsurf)
+`~/.config/devin/mcp_config.json` (Windows: `%APPDATA%\devin\mcp_config.json`):
+```json
+{
+  "mcpServers": {
+    "websitepublisher": { "serverUrl": "https://mcp.websitepublisher.ai/" }
+  }
+}
+```
+Restart, then enable the server in the Cascade panel (… → MCPs).
+
+### Mistral / Le Chat
+In Le Chat open **Intelligence → Connectors → + Add Connector**, search for **WebsitePublisher** in the directory, click **Add** and sign in. Enable it under the Tools button in your chat.
+
+### Gemini
+On gemini.google.com open **Settings → Connected Apps** and add a custom app with URL `https://mcp.websitepublisher.ai`. (Google currently limits custom apps to personal US accounts with Gemini in English; Workspace admins can add it for their organisation.)
+
+### Grok
+On grok.com open **Settings → Connectors** and add a custom connector with URL `https://mcp.websitepublisher.ai`.
+
+### Any other MCP client
+Clients with remote Streamable HTTP and OAuth: point them at `https://mcp.websitepublisher.ai/`. Clients that only run local (stdio) servers can use the `mcp-remote` bridge (Node.js 18+):
 ```json
 {
   "mcpServers": {
@@ -54,170 +93,126 @@ Search **"WebsitePublisher"** in the GPT Store, or visit:
   }
 }
 ```
+
+**Quick test:** ask your AI *"List my WebsitePublisher projects"*. If that works, you're connected.
 
 ---
 
 ## 🔑 Authentication
 
-**Zero configuration required.** WebsitePublisher uses OAuth 2.1 with automatic discovery:
+No API keys. WebsitePublisher uses OAuth 2.1 with automatic discovery:
 
-1. Your AI client connects to `https://mcp.websitepublisher.ai/`
-2. Server responds with `401` + discovery metadata ([RFC 9728](https://www.rfc-editor.org/rfc/rfc9728))
-3. Client auto-registers via Dynamic Client Registration ([RFC 7591](https://www.rfc-editor.org/rfc/rfc7591))
-4. Browser opens → Login with Google or email (OTP) → Redirect back
-5. Client receives OAuth token → Connected ✅
+1. The client connects to `https://mcp.websitepublisher.ai/` and receives `401` with discovery metadata ([RFC 9728](https://www.rfc-editor.org/rfc/rfc9728)).
+2. It registers itself via Dynamic Client Registration ([RFC 7591](https://www.rfc-editor.org/rfc/rfc7591)).
+3. A browser opens: sign in with Google or email (one-time code).
+4. The client receives its tokens and refreshes them automatically.
 
-PKCE is enforced on all flows. No API keys to manage.
+PKCE (S256) is required on all flows. Never share the `oauth` section a client writes to its config file: it holds personal tokens.
 
 ---
 
 ## 🛠 Tools
 
-57 tools organized across twelve categories:
+45 tools. Every write is live immediately at the project's URL; there is no separate deploy step.
 
-### 📁 Project Management
+### Start & projects
 | Tool | Description |
 |------|-------------|
-| `get_skill` | Get the full agent skill document with patterns, snippets, and go-live checklist |
-| `list_projects` | List all projects you have access to |
-| `get_project_status` | Get project details: pages, assets, domain info |
+| `get_started` | Call first: your projects with live URLs, which one to build in, and the exact next call |
+| `get_skill` | Build patterns, design guidelines and the go-live checklist |
+| `list_projects` | All projects you have access to |
+| `get_project_status` | Project details: page, asset and entity counts, plan limits |
+| `create_project` | Create a project (live at `project{ID}.websitepublisher.ai`; link your own domain in the dashboard) |
 
-### 📄 Pages
+### Pages & versions
 | Tool | Description |
 |------|-------------|
-| `list_pages` | List all pages in a project |
-| `get_page` | Get page content with version info |
-| `create_page` | Create a new HTML page |
-| `update_page` | Replace full page content |
-| `patch_page` | Apply targeted changes (diff-based, saves tokens) |
-| `delete_page` | Delete a page |
-| `get_page_versions` | View version history |
-| `rollback_page` | Restore a previous version |
+| `list_pages` | Compact page index (no content) |
+| `get_page` | One page with content and version hash |
+| `create_page` | Publish a new page — live the moment the call returns |
+| `update_page` | Replace a page (optimistic lock on version hash) |
+| `patch_page` | Targeted find/replace edits without resending the page |
+| `delete_page` | Delete a page (30 days in the project trash) |
+| `get_page_versions` | Version history |
+| `rollback_page` | Restore an earlier version |
+| `fragments` | Shared HTML blocks (nav, footer, banners): list, create, update, patch, delete |
 
-### 🧩 Fragments (Reusable Components)
+### Assets
 | Tool | Description |
 |------|-------------|
-| `list_fragments` | List all reusable HTML fragments |
-| `create_fragment` | Create a reusable fragment (nav, footer, banner) |
-| `update_fragment` | Update a fragment — all pages using it update automatically |
-| `delete_fragment` | Delete a fragment |
+| `list_assets` | Images, CSS, JS, fonts, PDFs |
+| `get_asset` | Read an asset's content |
+| `upload_asset` | Upload via base64, plain text or public URL |
+| `patch_asset` | Find/replace edits in CSS, JS, JSON or SVG |
+| `delete_asset` | Delete an asset |
 
-### 🖼 Assets
+### Data (MAPI)
 | Tool | Description |
 |------|-------------|
-| `list_assets` | List uploaded files (images, CSS, JS) |
-| `upload_asset` | Upload a file via base64 or URL |
-| `delete_asset` | Remove an asset |
-| `patch_asset` | Apply text changes to CSS/JS/SVG assets without re-uploading |
+| `entities` | Data models: list, create, update, delete, schema, properties, public read |
+| `records` | Rows in an entity: list, get, create, update, delete |
 
-### 📊 Entities (Structured Data)
+### Vault
 | Tool | Description |
 |------|-------------|
-| `list_entities` | List data models in a project |
-| `create_entity` | Create a new data model with properties |
-| `get_entity_schema` | Get the schema/structure of an entity |
-| `update_entity` | Update entity metadata or enable public read access |
-| `delete_entity` | Remove an entity and all its data |
-
-### 📝 Records (Data)
-| Tool | Description |
-|------|-------------|
-| `list_records` | List records with pagination |
-| `get_record` | Get a single record by ID |
-| `create_record` | Create a new record |
-| `update_record` | Update an existing record |
-| `delete_record` | Delete a record |
-
-### 🔐 Vault (Secrets Management)
-| Tool | Description |
-|------|-------------|
-| `vault_list_secrets` | List stored secrets (metadata only, never values) |
-| `vault_store_secret` | Store or update an encrypted secret (AES-256-GCM) |
+| `vault_list_secrets` | Stored secrets — metadata only, never values |
+| `vault_store_secret` | Store an encrypted secret (AES-256-GCM, write-only) |
 | `vault_delete_secret` | Permanently delete a secret |
 
-### 🔌 Integrations
+### Integrations
 | Tool | Description |
 |------|-------------|
-| `list_integrations` | List available integrations and their config status |
-| `get_integration_schema` | Get full schema of an integration's endpoints and inputs |
-| `setup_integration` | Configure an integration by storing API keys |
-| `execute_integration` | Execute an integration action (email, payment, etc.) |
-| `remove_integration` | Remove an integration and its vault secrets |
+| `search_integrations` | Find a capability in plain language, across all your projects |
+| `list_integrations` | Integrations of a project and whether they are configured |
+| `get_integration_schema` | Endpoints, inputs and usage guidance of one integration |
+| `setup_integration` | Configure an integration (keys go to the vault) |
+| `execute_integration` | Run an integration action — credentials resolved server-side |
+| `remove_integration` | Remove an integration and its secrets |
 
-### 📬 Forms & Lead Capture
+### Forms, visitor login & analytics
 | Tool | Description |
 |------|-------------|
-| `configure_form` | Define form fields and submit actions (leads, email, webhook) |
-| `list_forms` | List all configured forms |
-| `remove_form` | Remove a form configuration |
+| `configure_form` | Define a form and its server-side actions (leads, email, webhook) |
+| `list_forms` | Configured forms |
+| `remove_form` | Remove a form |
+| `configure_visitor_auth` | Visitor login by magic link or 6-digit code |
+| `get_visitor_auth_config` | Current visitor login settings |
+| `get_analytics` | Pageviews, visitors, referrers, devices, UTM, trend |
 
-### 🔒 Visitor Authentication
+### Tracking
 | Tool | Description |
 |------|-------------|
-| `configure_visitor_auth` | Enable email-based visitor login (magic link or code) |
-| `get_visitor_auth_config` | Get current visitor auth settings |
-
-### 📈 Tracking & Analytics
-| Tool | Description |
-|------|-------------|
-| `set_tracking_scripts` | Set GA, GTM, Meta Pixel, or custom tracking scripts |
-| `get_tracking_scripts` | Get current tracking configuration |
+| `set_tracking_scripts` | GA, GTM, Meta Pixel or other scripts on every page |
+| `get_tracking_scripts` | Current tracking scripts |
 | `remove_tracking_scripts` | Remove all tracking scripts |
-| `get_analytics` | Get visitor analytics: pageviews, referrers, devices, UTM |
 
-### 🖼️ Visual Image Editor
+### Visual editor
 | Tool | Description |
 |------|-------------|
-| `create_edit_session` | Create a browser-based image editing session |
-| `get_edit_session_changes` | Read back what the user changed in the editor |
+| `create_edit_session` | Browser-based editor link so the user can place and edit images |
+| `get_edit_session_changes` | What the user changed in the editor |
 
-### ⏰ Scheduled Tasks
+### Scheduled tasks & project memory
 | Tool | Description |
 |------|-------------|
-| `create_scheduled_task` | Create a cron-based scheduled task |
-| `list_scheduled_tasks` | List scheduled tasks with status and next run time |
-| `delete_scheduled_task` | Delete a scheduled task |
+| `create_scheduled_task` | Run a task on a cron schedule or once |
+| `list_scheduled_tasks` | Tasks with status and next run |
+| `delete_scheduled_task` | Delete a task |
+| `tasks` | Project memory: tasks with append-only history, across sessions and assistants |
 
-### 📋 Task Tracker
-| Tool | Description |
-|------|-------------|
-| `list_tasks` | List all tracked tasks with completion percentage |
-| `get_task` | Get task details and status |
-| `get_task_history` | Get full history of a task (progress, notes, documents) |
-| `create_task` | Create a new task |
-| `add_task_history` | Append progress update or note to a task |
-| `export_tasks` | Export all tasks as Markdown grouped by status |
+Integrations add no extra tools: their endpoints run through `execute_integration`. Browse all 133 at [websitepublisher.ai/docs/integrations](https://www.websitepublisher.ai/docs/integrations) or the machine-readable [integrations.txt](https://www.websitepublisher.ai/integrations.txt).
 
 ---
 
-## 🌍 Supported AI Platforms
-
-| Platform | Connection | Auth |
-|----------|-----------|------|
-| **Claude.ai** | Native Connector | OAuth 2.1 (automatic) |
-| **Claude Desktop** | via `mcp-remote` | OAuth 2.1 (browser) |
-| **Mistral / Le Chat** | Native MCP connector | OAuth 2.1 (automatic) |
-| **ChatGPT** | GPT Actions | OAuth 2.0 |
-| **Cursor** | via `mcp-remote` | OAuth 2.1 (browser) |
-| **Windsurf** | via `mcp-remote` | OAuth 2.1 (browser) |
-| **Claude Code** | via `mcp-remote` | OAuth 2.1 (browser) |
-| **GitHub Copilot** | MCP config | OAuth 2.1 (browser) |
-| **JetBrains AI** | MCP config | OAuth 2.1 (browser) |
-| **Grok** | MCP config | OAuth 2.1 (browser) |
-| **Gemini** | MCP config | OAuth 2.1 (browser) |
-
----
-
-## 📋 Technical Details
+## 📋 Technical details
 
 | | |
 |---|---|
 | **Server URL** | `https://mcp.websitepublisher.ai/` |
-| **Transport** | Streamable HTTP (JSON-RPC over POST) |
-| **Protocol** | MCP 2025-06-18 |
-| **Auth Discovery** | `https://mcp.websitepublisher.ai/.well-known/oauth-protected-resource` |
-| **Auth Server** | `https://auth.websitepublisher.ai/.well-known/oauth-authorization-server` |
-| **Token Types** | `wps_` (session), `wpr_` (refresh), `wpc_` (client ID) |
+| **Transport** | Streamable HTTP (JSON-RPC 2.0) |
+| **Protocol** | MCP 2025-11-25 |
+| **Auth discovery** | `https://mcp.websitepublisher.ai/.well-known/oauth-protected-resource` |
+| **Auth server** | `https://auth.websitepublisher.ai/.well-known/oauth-authorization-server` |
 | **PKCE** | Required (S256) |
 | **Scopes** | `mcp:read`, `mcp:write`, `mcp:full` |
 
@@ -225,52 +220,54 @@ PKCE is enforced on all flows. No API keys to manage.
 
 ## 💰 Pricing
 
-| Plan | Price | Projects | Pages | Custom Domain |
-|------|-------|----------|-------|---------------|
-| **Free** | €0/mo | 1 | 5 | ❌ |
-| **Starter** | €9/mo | 3 | 25/project | ✅ |
-| **Pro** | €19/mo | 10 | Unlimited | ✅ |
-| **Agency** | €49/mo | 50 | Unlimited | ✅ |
+Prices in euros, excluding VAT. Live: [websitepublisher.ai/pricing](https://www.websitepublisher.ai/pricing).
+
+| Plan | Price | Projects | Pages per project |
+|------|-------|----------|-------------------|
+| **Free** | €0 | 1 | 5 |
+| **Solo** | €4/mo | 1 | 15 |
+| **Starter** | €9/mo | 3 | 30 |
+| **Pro** | €19/mo | 10 | 100 |
+| **Agency** | €49/mo | 30 | 300 |
 
 ---
 
 ## 📖 Documentation
 
-- **Getting Started:** [websitepublisher.ai/docs](https://websitepublisher.ai/docs)
-- **MCP Setup:** [websitepublisher.ai/docs/mcp](https://websitepublisher.ai/docs/mcp)
-- **API Reference (PAPI):** [websitepublisher.ai/docs/papi](https://websitepublisher.ai/docs/papi)
-- **API Reference (MAPI):** [websitepublisher.ai/docs/mapi](https://websitepublisher.ai/docs/mapi)
+- **MCP setup per AI client:** [websitepublisher.ai/docs/mcp](https://www.websitepublisher.ai/docs/mcp)
+- **Quick start:** [websitepublisher.ai/docs/quickstart](https://www.websitepublisher.ai/docs/quickstart)
+- **Pages & assets (PAPI):** [websitepublisher.ai/docs/papi](https://www.websitepublisher.ai/docs/papi)
+- **Data (MAPI):** [websitepublisher.ai/docs/mapi](https://www.websitepublisher.ai/docs/mapi)
+- **Forms & visitor login (SAPI):** [websitepublisher.ai/docs/sapi](https://www.websitepublisher.ai/docs/sapi)
+- **Integrations:** [websitepublisher.ai/docs/integrations](https://www.websitepublisher.ai/docs/integrations)
+- **For AI agents:** [llms.txt](https://www.websitepublisher.ai/llms.txt) · [llms-full.txt](https://www.websitepublisher.ai/llms-full.txt)
 - **Dashboard:** [dashboard.websitepublisher.ai](https://dashboard.websitepublisher.ai)
-- **Privacy Policy:** [websitepublisher.ai/privacy](https://websitepublisher.ai/privacy)
-- **Terms of Service:** [websitepublisher.ai/terms](https://websitepublisher.ai/terms)
 
 ---
 
-## 🔒 Security & Privacy
+## 🔒 Security & privacy
 
-- OAuth 2.1 with PKCE on all flows
-- Dynamic Client Registration (RFC 7591) — no pre-shared secrets
+- OAuth 2.1 with PKCE on all flows, Dynamic Client Registration — no pre-shared secrets
+- Credentials for integrations live in an encrypted vault (AES-256-GCM); the AI never sees the values
 - Rate limiting on all endpoints
-- Content scanning and fraud prevention
-- No credentials stored in client — token-based sessions only
-- **Privacy Policy:** [websitepublisher.ai/privacy](https://websitepublisher.ai/privacy)
+- [Privacy policy](https://www.websitepublisher.ai/privacy) · [Terms](https://www.websitepublisher.ai/terms)
 
 ---
 
-## 🏗 This Repository
+## 🏗 This repository
 
-This is the **documentation and integration repository** for the WebsitePublisher.ai MCP server. The server itself is a hosted SaaS service — no installation or self-hosting required. Just connect your AI client to `https://mcp.websitepublisher.ai/` and start building.
+This is the documentation and integration repository for the WebsitePublisher AI MCP server. The server is a hosted service: no installation or self-hosting. Connect your AI client to `https://mcp.websitepublisher.ai/` and start building.
 
 ---
 
 ## 📬 Support
 
-- **Docs:** [websitepublisher.ai/docs](https://websitepublisher.ai/docs)
+- **Docs:** [websitepublisher.ai/docs](https://www.websitepublisher.ai/docs)
 - **Email:** support@websitepublisher.ai
-- **Website:** [websitepublisher.ai](https://websitepublisher.ai)
+- **Website:** [websitepublisher.ai](https://www.websitepublisher.ai)
 
 ---
 
 <p align="center">
-  <strong>WebsitePublisher.ai</strong> — The easiest way to build websites with AI.
+  <strong>WebsitePublisher AI</strong> — Your AI Builds and Publishes Websites & Apps — You Just Talk
 </p>

@@ -36,11 +36,14 @@ Write only the `transport` block. Cline adds the `oauth` section on its own afte
 
 ## First connection (user action required)
 
-1. After you save the settings, Cline discovers the auth server and registers itself as a client. A browser window then opens at `auth.websitepublisher.ai`.
-2. The user logs in with Google or with email (a one-time code). Tell the user this is expected.
-3. After login, the browser redirects back to Cline and the connection is complete. Cline stores the tokens and refreshes them automatically.
+Saving the settings does not start the login by itself. The login starts on the first tool call, so make that call straight away:
 
-Do not try to complete the login on the user's behalf.
+1. Right after saving, call `get_started` (no arguments).
+2. The first call fails with `401` or "requires OAuth authorization". That is expected: it makes Cline start the OAuth flow. Cline registers itself as a client and opens a browser window at `auth.websitepublisher.ai` (or shows a **Connect** / authorize button for this server in its MCP panel).
+3. Tell the user to log in with Google or with email (a one-time code). The browser then redirects back to Cline; Cline stores the tokens and refreshes them automatically.
+4. Call `get_started` again. It now returns the user's projects.
+
+Do not try to complete the login on the user's behalf, and do not write an `oauth` section yourself (not even `"authorizationRequired": true`): Cline manages that section.
 
 ## Alternative: via mcp-remote
 
@@ -59,8 +62,10 @@ Use this only if the native connection is not available in the user's Cline vers
 
 ## Verify the installation
 
-1. Call `get_started` with no arguments. It returns the user's project and the recommended next call.
+1. Call `get_started` with no arguments. It returns the user's projects and the recommended next call.
 2. Optionally, call `list_projects`. A response that lists projects, or an empty list for a new account, means the setup works.
+
+If the MCP panel shows the server without tools or without a Connect button, make one tool call (step 1): that starts the login.
 
 ## Troubleshooting
 
@@ -77,5 +82,7 @@ Use this only if the native connection is not available in the user's Cline vers
 - Every write is live immediately at the project's URL. There is no separate deploy step.
 - Before building or changing a site, call `get_skill`. Then call `get_skill` with `skill_name: "design"`.
 - Store credentials with the vault tools only. Never put them in page code.
+- A new project's address is assigned: `project{ID}.websitepublisher.ai`. A subdomain passed to `create_project` is ignored for customer accounts; for a branded address the user links their own domain in the dashboard (paid plans).
+- Page JavaScript reads public data from `https://api.websitepublisher.ai/mapi/public/{project_id}/{entity}` (entity with `public_read` on, GET only). There is no `project` segment after `public`.
 
 More: https://www.websitepublisher.ai/docs/mcp
