@@ -38,7 +38,7 @@ Add to `cline_mcp_settings.json`. Cline handles the OAuth login:
   }
 }
 ```
-The login starts on the first tool call: ask Cline *"List my WebsitePublisher projects"* and sign in when the browser opens. See [llms-install.md](llms-install.md) for agent-driven setup.
+After saving, open Cline's MCP servers panel and click **Connect** next to WebsitePublisher, then sign in when the browser opens. Cline shows the tools only after that login. See [llms-install.md](llms-install.md) for agent-driven setup.
 
 ### Cursor
 `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` (one project):

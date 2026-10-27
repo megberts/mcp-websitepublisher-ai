@@ -36,12 +36,11 @@ Write only the `transport` block. Cline adds the `oauth` section on its own afte
 
 ## First connection (user action required)
 
-Saving the settings does not start the login by itself. The login starts on the first tool call, so make that call straight away:
+Cline gives this server's tools to the model only after the user has logged in. Until then you cannot call `get_started` or any other tool, so the login cannot start with a tool call. After saving the settings:
 
-1. Right after saving, call `get_started` (no arguments).
-2. The first call fails with `401` or "requires OAuth authorization". That is expected: it makes Cline start the OAuth flow. Cline registers itself as a client and opens a browser window at `auth.websitepublisher.ai` (or shows a **Connect** / authorize button for this server in its MCP panel).
-3. Tell the user to log in with Google or with email (a one-time code). The browser then redirects back to Cline; Cline stores the tokens and refreshes them automatically.
-4. Call `get_started` again. It now returns the user's projects.
+1. Tell the user to open Cline's MCP servers panel, find **WebsitePublisher** (it shows "OAuth authorization required") and click **Connect**. If no Connect button shows yet, restart the server from that panel.
+2. A browser window opens at `auth.websitepublisher.ai`. The user logs in with Google or with email (a one-time code). The browser then redirects back to Cline; Cline registers itself as a client, stores the tokens and refreshes them automatically.
+3. When the panel shows the server as connected, call `get_started` (no arguments). It returns the user's projects.
 
 Do not try to complete the login on the user's behalf, and do not write an `oauth` section yourself (not even `"authorizationRequired": true`): Cline manages that section.
 
@@ -65,7 +64,7 @@ Use this only if the native connection is not available in the user's Cline vers
 1. Call `get_started` with no arguments. It returns the user's projects and the recommended next call.
 2. Optionally, call `list_projects`. A response that lists projects, or an empty list for a new account, means the setup works.
 
-If the MCP panel shows the server without tools or without a Connect button, make one tool call (step 1): that starts the login.
+If the MCP panel shows "OAuth authorization required", the user has not logged in yet: ask them to click **Connect** (see "First connection").
 
 ## Troubleshooting
 
