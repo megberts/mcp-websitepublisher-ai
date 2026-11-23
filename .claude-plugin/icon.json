@@ -1,0 +1,23 @@
+{
+  "name": "websitepublisher",
+  "displayName": "WebsitePublisher",
+  "description": "Build and publish real websites and web apps through conversation with WebsitePublisher, the AI Web Platform: pages, forms, visitor login, payments, email and data, live on a real URL.",
+  "version": "1.0.0",
+  "icon": "./assets/icon.png",
+  "author": {
+    "name": "WebsitePublisher",
+    "url": "https://www.websitepublisher.ai"
+  },
+  "homepage": "https://www.websitepublisher.ai",
+  "repository": "https://github.com/megberts/mcp-websitepublisher-ai",
+  "license": "MIT",
+  "keywords": [
+    "website",
+    "web app",
+    "landing page",
+    "webshop",
+    "publishing",
+    "hosting"
+  ],
+  "privacyPolicyUrl": "https://www.websitepublisher.ai/privacy"
+}

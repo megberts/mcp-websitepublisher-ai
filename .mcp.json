@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "websitepublisher": {
+      "type": "http",
+      "url": "https://mcp.websitepublisher.ai/"
+    }
+  }
+}
