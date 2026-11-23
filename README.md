@@ -23,6 +23,14 @@ WebsitePublisher is listed in Anthropic's Connectors Directory: one click, on ev
 1. Open the [WebsitePublisher listing](https://claude.ai/directory/websitepublisher-ai), or in claude.ai go to **Settings → Connectors** and search for **WebsitePublisher**.
 2. Click **Connect** and sign in. The tools are available in your chat right away.
 
+### Claude Code and Cowork (plugin)
+This repository is also a Claude plugin. It adds the same remote MCP server
+(`https://mcp.websitepublisher.ai/`) and one skill, `websitepublisher`, that tells Claude when to
+use WebsitePublisher and loads the live build guide from the server with `get_skill`. The plugin
+runs no code and downloads nothing: it only points Claude at the MCP server, where every user
+signs in with OAuth in the browser. Install it from the Claude plugin directory, or in Claude Code
+with `/plugin`.
+
 ### ChatGPT
 1. Open the **WebsitePublisher** app in ChatGPT's app directory and connect it (free and Plus accounts work).
 2. Start your message with **@WebsitePublisher**, for example: *"@WebsitePublisher build me a portfolio website"*.
