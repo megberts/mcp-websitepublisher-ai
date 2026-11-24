@@ -19,5 +19,8 @@
     "publishing",
     "hosting"
   ],
-  "privacyPolicyUrl": "https://www.websitepublisher.ai/privacy"
+  "privacyPolicyUrl": "https://www.websitepublisher.ai/privacy",
+  "supportUrl": "https://www.websitepublisher.ai/contact",
+  "termsOfServiceUrl": "https://www.websitepublisher.ai/terms",
+  "documentationUrl": "https://www.websitepublisher.ai/docs/integrations"
 }
